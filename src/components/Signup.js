@@ -1,23 +1,23 @@
 import React, {useRef, useState} from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
-
+import { Link } from "react-router-dom"
 export default function Signup() {
-    const emailRef = useRef()
-    const passwordRef = useRef()
-    const passwordConfirmRef = useRef()
-    const [error, setError] = useState('')
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const passwordConfirmRef = useRef();
+    const [localErrors, setLocalErrors] = useState('');
     
     function handleSumbit(e){
         e.preventDefault()
 
         if(passwordRef.current.value !== passwordConfirmRef.current.value){
-            return setError("Passwords do not match!")
+            return setLocalErrors("Passwords do not match!")
         }
     }
 
 
   return (
-      <>
+      <div className="w-100" style={{maxWidth:'400px'}}>
       <Card>
           <Card.Body>
               <h2 className='text-center mb-4'> Sign Up</h2>
@@ -41,6 +41,6 @@ export default function Signup() {
       <div className='w-100 text-center mt-2'>
           Already have an account? Log In
       </div>
-    </>
+    </div>
   )
 }

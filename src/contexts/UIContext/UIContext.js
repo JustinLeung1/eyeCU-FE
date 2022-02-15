@@ -1,9 +1,9 @@
 import { createContext, useContext, useReducer } from "react";
-import uiReducer, {intialState} from "./uiReducer";
+import uiReducer, { initialState } from "./uiReducer";
 
 const UIContext = createContext();
 export const UIProvider = ({children}) =>{
-    const [state, dispatch] = useReducer(uiReducer, intialState)
+    const [state, dispatch] = useReducer(uiReducer, initialState)
     // Add actions here
     // ex log in and what not
 

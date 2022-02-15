@@ -1,6 +1,6 @@
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI, STOP_LOADING_UI} from '../types';
 
-const initialState = {
+export const initialState = {
     loading:false,
     errors: null
 }

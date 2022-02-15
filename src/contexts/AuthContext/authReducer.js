@@ -2,12 +2,12 @@ import { SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED } from "../types"
 
 
 
-const initialState = {
-    authenticated: False,
+export const intialState = {
+    authenticated: false,
     user: {}
 }
 
-const authReducer = (state = initialState, action) =>{
+const authReducer = (state = intialState, action) =>{
     switch (action.type){
         case SET_AUTHENTICATED:
             return{
@@ -15,7 +15,7 @@ const authReducer = (state = initialState, action) =>{
                 authenticated:true
             };
         case SET_UNAUTHENTICATED:
-            return initialState;
+            return intialState;
         case SET_USER:
             return{
                 authenicated: true,
@@ -26,3 +26,5 @@ const authReducer = (state = initialState, action) =>{
     }
 
 }
+
+export default authReducer;

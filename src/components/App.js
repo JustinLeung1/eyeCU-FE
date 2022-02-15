@@ -4,7 +4,9 @@ import Signup from "./Signup";
 
 import axios from 'axios';
 import jwtDecode from "jwt-decode";
+import { AppContextProvider } from "../contexts/AppContextProvider";
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 axios.defaults.baseURL = 'http://localhost:5000'
 const token = localStorage.FBIdToken;
@@ -21,9 +23,13 @@ if (token){
 function App() {
   return (
     <Container className="d-flex align-items-center justify-content-center" style={{minHeight:'100vh'}}>
-      <div className="w-100" style={{maxWidth:'400px'}}>
-        <Signup/>
-      </div>
+      <Router>
+        <AppContextProvider>
+          <Routes>
+            <Route path="/signup" element={<Signup/>}/>
+          </Routes>
+        </AppContextProvider>
+      </Router>
     </Container>
   );
 }
