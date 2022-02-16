@@ -1,11 +1,11 @@
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI, STOP_LOADING_UI} from '../types';
 
-export const initialState = {
+export const uiInitialState = {
     loading:false,
     errors: null
 }
 
-export default function(state = initialState, action){
+export default function(state = uiInitialState, action){
     switch (action.type) {
         case SET_ERRORS:
           return {
@@ -20,6 +20,7 @@ export default function(state = initialState, action){
             errors: null
           };
         case LOADING_UI:
+          console.log("running loading ui")
           return {
             ...state,
             loading: true

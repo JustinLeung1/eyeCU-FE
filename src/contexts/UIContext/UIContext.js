@@ -1,13 +1,15 @@
 import { createContext, useContext, useReducer } from "react";
-import uiReducer, { initialState } from "./uiReducer";
+import uiReducer, { uiInitialState } from "./uiReducer";
 
 const UIContext = createContext();
 export const UIProvider = ({children}) =>{
-    const [state, dispatch] = useReducer(uiReducer, initialState)
+    const [state, dispatch] = useReducer(uiReducer, uiInitialState)
     // Add actions here
     // ex log in and what not
 
     const value = {
+        loading:state.loading,
+        errors:state.errors
         
     }
     return <UIContext.Provider value={value}>{children}</UIContext.Provider>

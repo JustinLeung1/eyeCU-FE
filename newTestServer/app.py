@@ -34,13 +34,25 @@ def createdResponse(message):
 # add errors
 # add validators class or methods
 @app.route('/login', methods=['GET', 'POST'])
-def hello_world():
+def login():
     body = request.get_json()
     access_token = create_access_token(identity="Justin")
     #return positiveReponse({"token": access_token})
     errors = {}
     errors["general"] = 'Wrong Credentials, please try again' # this has to be general to fit the needs
     return user_error_to_json({"general":'Wrong Credentials, please try again'})
+    #return jsonify({"token": encoded_jwt})
+    #return jsonify(body)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    body = request.get_json()
+    print(body)
+    access_token = create_access_token(identity="Justin")
+    return positiveReponse({"token": access_token})
+    # errors = {}
+    # errors["general"] = 'Wrong Credentials, please try again' # this has to be general to fit the needs
+    # return user_error_to_json({"general":'Wrong Credentials, please try again'})
     #return jsonify({"token": encoded_jwt})
     #return jsonify(body)
 

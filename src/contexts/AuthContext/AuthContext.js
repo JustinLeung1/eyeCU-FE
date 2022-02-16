@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import authReducer, { intialState } from "./authReducer";
+import authReducer, { authIntialState } from "./authReducer";
 import axios from "axios";
 import {
     SET_USER,
@@ -12,7 +12,7 @@ import {
 
 const AuthContext = createContext();
 export const AuthProvider = ({children}) =>{
-    const [state, dispatch] = useReducer(authReducer, intialState)
+    const [state, dispatch] = useReducer(authReducer, authIntialState)
     // Add actions here
     // ex log in and what not
 
