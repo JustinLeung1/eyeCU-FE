@@ -67,10 +67,11 @@ def protected():
         'image':"data:image/jpeg;base64,{}".format(sender)
     }
     return positiveReponse(user_data)
-  
+
+
 # main driver function
 if __name__ == '__main__':
   
     # run() method of Flask class runs the application 
     # on the local development server.
-    app.run(debug=True)
+    app.run(debug=True, port=5001)

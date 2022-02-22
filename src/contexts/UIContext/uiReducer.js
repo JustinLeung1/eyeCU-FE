@@ -20,7 +20,6 @@ export default function(state = uiInitialState, action){
             errors: null
           };
         case LOADING_UI:
-          console.log("running loading ui")
           return {
             ...state,
             loading: true

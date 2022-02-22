@@ -7,34 +7,14 @@ import jwtDecode from "jwt-decode";
 import { AppContextProvider } from "../contexts/AppContextProvider";
 import { GlobalContextProvider, StateContext, DispatchContext } from "../contexts/AppContextProvider";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { getUserData, logoutUser } from "../contexts/AuthContext/AuthActions";
+import { SET_AUTHENTICATED } from "../contexts/types"
 
-axios.defaults.baseURL = 'http://localhost:5000'
+import { processDispatch } from "../utils/utils";
 
-
+axios.defaults.baseURL = 'http://localhost:5001'
 
 function App() {
-
-  const dispatch = useContext(DispatchContext);
-
-  const checkForToken = () =>{
-    const token = localStorage.FBIdToken;
-    if (token){
-      const decodedToken = jwtDecode(token);
-      if (decodedToken.exp * 1000 < Date.now()){
-        // this means that the token is active
-        // store.dispatch(logoutUser());
-        // window.location.href = '/login';
-      }
-      else{
-        // this means the token is unactive
-        // dispatch({ type: SET_AUTHENTICATED });
-        // axios.defaults.headers.common['Authorization'] = token;
-        // dispatch(getUserData());
-      }
-    }
-  }
-
-
   return (
     <Container className="d-flex align-items-center justify-content-center" style={{minHeight:'100vh'}}>
       <Router>

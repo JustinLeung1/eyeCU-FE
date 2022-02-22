@@ -1,5 +1,5 @@
-import React, {useContext, useRef, useState} from 'react'
-import { Form, Button, Card } from 'react-bootstrap'
+import React, {useContext, useEffect, useRef, useState} from 'react'
+import { Alert, Form, Button, Card } from 'react-bootstrap'
 import { Link, useNavigate } from "react-router-dom"
 import { loginUser, signUpUser, test } from '../contexts/AuthContext/AuthActions';
 import { DispatchContext, StateContext } from '../contexts/AppContextProvider';
@@ -13,11 +13,22 @@ export default function Signup() {
     // const [globalState, globalDispatch] = useContext(GlobalContext);
     const dispatch = useContext(DispatchContext);
     const [authState, uiState] = useContext(StateContext);
+
+    const [authenticated, setAuthenticated] = useState(authState.authenticated);
+    const [errors, setErrors] = useState(uiState.errors)
+    const [nonLocalLoading, setNonLocalLoading] = useState(uiState.loading)
+    //const [nonlocalErrors, setNonlocalErrors] = useState(uiState);
+    // Todo we must figure out how to get the errors from the state to the be presented - Done
+    // Must add validation on front end before sending over to the front end
     
-    // Todo we must figure out how to get the errors from the state to the be presented
+    // This function will update our errors ors 
+    console.log(authState)
+    useEffect(()=>{
+      setErrors(uiState.errors)
+      setNonLocalLoading(uiState.loading)
+    }, [uiState.errors, uiState.loading])
+
     function handleSubmit(e){
-        console.log(authState)
-        console.log(uiState)
         e.preventDefault()
         setLocalErrors("");
         setLoading(true)
@@ -49,6 +60,7 @@ export default function Signup() {
       <Card>
           <Card.Body>
               <h2 className='text-center mb-4'> Sign Up</h2>
+              {errors && <Alert variant="danger">{errors.general}</Alert>}
           </Card.Body>
           <Form onSubmit={handleSubmit}>
               <Form.Group id="email">
@@ -63,7 +75,7 @@ export default function Signup() {
                 <Form.Label>Password Confirmation</Form.Label>
                 <Form.Control type="password" ref={passwordConfirmRef}required/>
               </Form.Group>
-              <Button type="submit" className='w-100'>Sign Up</Button>
+              <Button type="submit" disable={loading.toString() || nonLocalLoading.toString()}className='w-100'>Sign Up</Button>
           </Form>
       </Card>
       <div className='w-100 text-center mt-2'>

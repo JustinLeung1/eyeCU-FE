@@ -17,6 +17,7 @@ const authReducer = (state = authIntialState, action) =>{
         case SET_UNAUTHENTICATED:
             return authIntialState;
         case SET_USER:
+            console.log("Hit set user")
             return{
                 authenicated: true,
                 ...action.payload

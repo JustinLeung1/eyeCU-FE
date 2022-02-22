@@ -21,10 +21,18 @@ import {
       navigate("/");
     })
     .catch((err) => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data
-      });
+      if(!err.response){
+        dispatch({
+          type: SET_ERRORS,
+          payload: {general:"Backend Error"} // need to do this for all of them
+        });
+      }
+      else{
+        dispatch({
+          type: SET_ERRORS,
+          payload: err.response.data
+        });
+      }
     });    
 }
 
@@ -42,7 +50,6 @@ export const getUserData = (dispatch) => {
 };
 
   export const test = (userData, navigate, dispatch) =>{
-    console.log("test")
     dispatch({type: LOADING_UI})
   }
   export const signUpUser = (newUserData, navigate, dispatch) =>{
@@ -69,3 +76,10 @@ const setAuthorizationHeader = (token) => {
     localStorage.setItem('FBIdToken', FBIdToken);
     axios.defaults.headers.common['Authorization'] = FBIdToken;
   };
+
+export const logoutUser = (dispatch)  =>{
+    localStorage.removeItem('FBIdToken');
+    delete axios.defaults.headers.common['Authorization'];
+    console.log(dispatch)
+    //dispatch({type: SET_UNAUTHENTICATED});
+}
