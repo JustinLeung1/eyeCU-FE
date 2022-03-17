@@ -43,7 +43,7 @@ export default function Login() {
       <div className="w-100" style={{maxWidth:'400px'}}>
       <Card>
           <Card.Body>
-              <h2 className='text-center mb-4'> Sign Up</h2>
+              <h2 className='text-center mb-4'>Log in</h2>
               {errors && <Alert variant="danger">{errors.general}</Alert>}
           </Card.Body>
           <Form onSubmit={handleSubmit}>
@@ -55,7 +55,7 @@ export default function Login() {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" ref={passwordRef}required/>
               </Form.Group>
-              <Button type="submit" disable={loading.toString() || nonLocalLoading.toString()}className='w-100'>Sign Up</Button>
+              <Button type="submit" disable={loading.toString() || nonLocalLoading.toString()}className='w-100'>Log In</Button>
           </Form>
       </Card>
       <div className='w-100 text-center mt-2'>
