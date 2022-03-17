@@ -9,6 +9,7 @@ import {
   } from '../types';
 
   import axios from 'axios';
+  import { blobToBase64 } from '../../utils/utils';
 // we're gonna take out the dispatch from every part and we're gonna pass the dispatch in so we can move things around
   export const loginUser = (userData, navigate, dispatch) =>{
     dispatch({type: LOADING_UI});
@@ -82,4 +83,28 @@ export const logoutUser = (dispatch)  =>{
     delete axios.defaults.headers.common['Authorization'];
     console.log(dispatch)
     //dispatch({type: SET_UNAUTHENTICATED});
+}
+
+export const uploadImage = async (dispatch, image, navigate) =>{
+    dispatch({type: LOADING_UI}) // this is a maybe
+    axios
+    .post('/upload', image?.form_data, {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    })
+    .then((res) => {
+      getUserData(dispatch)
+      dispatch({ type: CLEAR_ERRORS });
+      navigate("/"); // change this to navigate home
+    })
+    .catch((err) => {
+      console.log(err)
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    });
+    //axios.post('/upload', image, ) # need to figure out how to pass this as data not url
+
 }

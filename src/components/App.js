@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Container } from "react-bootstrap";
 import Signup from "./Signup";
+import Login from "./Login";
 import Home from "./Home";
 import axios from 'axios';
 import jwtDecode from "jwt-decode";
@@ -9,6 +10,7 @@ import { GlobalContextProvider, StateContext, DispatchContext } from "../context
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { getUserData, logoutUser } from "../contexts/AuthContext/AuthActions";
 import { SET_AUTHENTICATED } from "../contexts/types"
+
 
 import { processDispatch } from "../utils/utils";
 
@@ -22,6 +24,7 @@ function App() {
           <Routes>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/" element={<Home/>}/>
+            <Route path="/login" element={<Login/>}/>
           </Routes>
         </GlobalContextProvider>
       </Router>

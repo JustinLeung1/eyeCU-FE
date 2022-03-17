@@ -22,7 +22,6 @@ export default function Signup() {
     // Must add validation on front end before sending over to the front end
     
     // This function will update our errors ors 
-    console.log(authState)
     useEffect(()=>{
       setErrors(uiState.errors)
       setNonLocalLoading(uiState.loading)
@@ -30,29 +29,17 @@ export default function Signup() {
 
     function handleSubmit(e){
         e.preventDefault()
-        setLocalErrors("");
+        setErrors({});
         setLoading(true)
+        if(passwordRef.current.value != passwordConfirmRef.current.value){
+          return setErrors({general:"Passwords do not match!"}); // need to keep errors here
+        }
         const object = {
           username: emailRef.current.value,
           password: passwordRef.current.value,
           confirmPassword: passwordConfirmRef.current.value 
         }
         signUpUser(object, navigate, dispatch)
-        
-        // try{
-        //   setLocalErrors("");
-        //   setLoading(true)
-        //   const object = {
-        //     username: emailRef.current.value,
-        //     password: passwordRef.current.value,
-        //     confirmPassword: passwordConfirmRef.currentl.value 
-        //   }
-        //   //signUpUser(object, navigate, dispatch);
-        //   test(object, navigate, dispatch);
-        //   console.log("should have called test")
-        // }catch{
-        //   setLocalErrors("Failed to log in")
-        // }
 
     }
   return (
