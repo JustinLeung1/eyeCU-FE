@@ -10,8 +10,9 @@ import { GlobalContextProvider, StateContext, DispatchContext } from "../context
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { getUserData, logoutUser } from "../contexts/AuthContext/AuthActions";
 import { SET_AUTHENTICATED } from "../contexts/types"
-
-
+import Video from "./Video";
+import LockSocketProvider from "../contexts/SocketContext/LockSocketContext/LockSocketProvider";
+import Profile from "./Profile";
 import { processDispatch } from "../utils/utils";
 
 axios.defaults.baseURL = 'http://localhost:5001'
@@ -21,11 +22,14 @@ function App() {
     <Container className="d-flex align-items-center justify-content-center" style={{minHeight:'100vh'}}>
       <Router>
         <GlobalContextProvider>
-          <Routes>
-            <Route path="/signup" element={<Signup/>}/>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/login" element={<Login/>}/>
-          </Routes>
+          <LockSocketProvider>
+            <Routes>
+              <Route path="/signup" element={<Signup/>}/>
+              <Route path="/home" element={<Home/>}/>
+              <Route path="/profile" element={<Profile/>}/>
+              <Route path="/login" element={<Login/>}/>
+            </Routes>
+          </LockSocketProvider>
         </GlobalContextProvider>
       </Router>
     </Container>
