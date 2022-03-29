@@ -1,5 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { useLockSocket } from '../contexts/SocketContext/LockSocketContext/LockSocketProvider';
+import {io} from "socket.io-client";
+ // this currently works but we need to disable clicking until it is set
 export default function Lock() {
     const openLock = () =>{
         fetch(BASEENDPOINT + 'open', {
@@ -22,14 +23,24 @@ export default function Lock() {
             closeLock();
         }
     }
-    const TIME = 1000;
-    const lockSocket = useLockSocket();
-    console.log(lockSocket);
-    const [locked, setLocked] = useState(true);
     const BASEENDPOINT = 'http://10.0.0.208:5001/';
-    //const BASEENDPOINT = 'http://10.0.0.135:5001/';
-    if (lockSocket){
-        lockSocket.on(("lockstatus"), (message)=>{
+    const TIME = 1000;
+    const [locked, setLocked] = useState(true);
+    const [socket, setSocket] = useState();
+    useEffect(()=>{
+        const newSocket = io(BASEENDPOINT + 'web', {
+            transports:["websocket"]
+        });
+        newSocket.on('connect', ()=>{
+            setSocket(newSocket);
+        })
+        return ()=>{
+            newSocket.disconnect();
+        }
+    }, [])
+    
+    if (socket){
+        socket.on(("lockstatus"), (message)=>{
             const currentStatus = (message.status === "CLOSED") ? true : false;
             if (currentStatus !== locked){
                 setLocked(currentStatus);
@@ -39,12 +50,12 @@ export default function Lock() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-        if (lockSocket){
-            lockSocket.emit("status")
-        }
+            if (socket){
+                socket.emit("status");
+            }
         }, 1000); // this runs at every second
         return () => clearInterval(interval);
-      }, []);
+      }, [socket]);
 
   return (
     <div>
