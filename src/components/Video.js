@@ -1,7 +1,38 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import {io} from "socket.io-client";
 
 export default function Video() {
+  const BASEENDPOINT = 'http://127.0.0.1:5001/';
+  const [img, setImg] = useState('');
+  const [socket, setSocket] = useState();
+
+
+  useEffect(()=>{
+    const imgListener = (message) =>{
+      setImg(message.image);
+    }
+
+    const newSocket = io(BASEENDPOINT + 'web', {
+        transports:["websocket"]
+    });
+    newSocket.on('connect', ()=>{
+        console.log("connected to socket")
+        setSocket(newSocket);
+    })
+    newSocket.on('server2web', imgListener)
+    return ()=>{
+        newSocket.disconnect();
+    }
+  }, [])
   return (
-    <div>Video</div>
+    <div>
+      <h2>Live Video Stream</h2>
+      {socket ? 
+      <img src={img}/>
+        :
+      <img style={{border:"5px solid black" }} src={"/unavailable.png"}/>
+      }
+      
+    </div>
   )
 }
