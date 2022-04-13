@@ -60,14 +60,19 @@ export default function Lock() {
   return (
     <div>
         <h1>Lock</h1>
-        {locked ? 
-                <img src={"/LockIcon.png"} onClick={openLock}></img>
-
-        : 
-
-                <img src={"/UnlockIcon.png"} onClick={closeLock}></img>
-
+        {socket ? 
+            <>
+                {locked ? 
+                    <img src={"/LockIcon.png"} onClick={openLock}></img>
+                : 
+                    <img src={"/UnlockIcon.png"} onClick={closeLock}></img>
+                }
+            </>
+        :
+            <img src={"/BrokenLock.png"}/>
+    
         }
+
 
     </div>
   )
