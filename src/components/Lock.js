@@ -3,13 +3,13 @@ import {io} from "socket.io-client";
  // this currently works but we need to disable clicking until it is set
 export default function Lock() {
     const openLock = () =>{
-        fetch(BASEENDPOINT + 'open', {
+        fetch(BASEENDPOINT + '/status/open', {
             method:'POST',
             mode:'no-cors'
         });
     }
     const closeLock = () =>{
-        fetch(BASEENDPOINT + 'close', {
+        fetch(BASEENDPOINT + '/status/close', {
             method:'POST',
             mode:'no-cors'
         });
@@ -23,13 +23,14 @@ export default function Lock() {
             closeLock();
         }
     }
-    const BASEENDPOINT = 'http://10.0.0.208:5001/';
+    const BASEENDPOINTlock = 'http://192.168.1.18:5002/';
+    const BASEENDPOINT = 'http://0.0.0.0:5001/';
     const TIME = 1000;
     const [locked, setLocked] = useState(true);
     const [socket, setSocket] = useState();
     useEffect(()=>{
-        const newSocket = io(BASEENDPOINT + 'web', {
-            transports:["websocket"]
+        const newSocket = io(BASEENDPOINTlock + 'web', {
+            transports:["polling", "websocket"]
         });
         newSocket.on('connect', ()=>{
             setSocket(newSocket);

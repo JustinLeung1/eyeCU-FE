@@ -19,7 +19,7 @@ import {
       setAuthorizationHeader(res.data.token);
       getUserData(dispatch);
       dispatch({ type: CLEAR_ERRORS });
-      navigate("/");
+      navigate("/home");
     })
     .catch((err) => {
       if(!err.response){
@@ -61,7 +61,7 @@ export const getUserData = (dispatch) => {
         setAuthorizationHeader(res.data.token);
         getUserData(dispatch)
         dispatch({ type: CLEAR_ERRORS });
-        navigate("/");
+        navigate("/home");
       })
       .catch((err) => {
         console.log(err)
