@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { loginUser, signUpUser, test } from '../contexts/AuthContext/AuthActions';
 import { DispatchContext, StateContext } from '../contexts/AppContextProvider';
 export default function Signup() {
+    const userRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
@@ -35,7 +36,8 @@ export default function Signup() {
           return setErrors({general:"Passwords do not match!"}); // need to keep errors here
         }
         const object = {
-          username: emailRef.current.value,
+          username: userRef.current.value,
+          email: emailRef.current.value,
           password: passwordRef.current.value,
           confirmPassword: passwordConfirmRef.current.value 
         }
@@ -50,6 +52,10 @@ export default function Signup() {
               {errors && <Alert variant="danger">{errors.general}</Alert>}
           </Card.Body>
           <Form onSubmit={handleSubmit}>
+              <Form.Group id="username">
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="username" ref={userRef}required/>
+              </Form.Group>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" ref={emailRef}required/>

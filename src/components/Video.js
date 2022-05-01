@@ -6,7 +6,6 @@ export default function Video() {
   const [img, setImg] = useState('');
   const [socket, setSocket] = useState();
 
-
   useEffect(()=>{
     const imgListener = (message) =>{
       setImg(message.image);

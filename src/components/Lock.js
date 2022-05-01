@@ -23,7 +23,8 @@ export default function Lock() {
             closeLock();
         }
     }
-    const BASEENDPOINTlock = 'http://192.168.1.18:5002/';
+    // const BASEENDPOINTlock = 'http://192.168.1.8:5002/';
+    const BASEENDPOINTlock = "http://10.0.0.136:5002/";
     const BASEENDPOINT = 'http://0.0.0.0:5001/';
     const TIME = 1000;
     const [locked, setLocked] = useState(true);
