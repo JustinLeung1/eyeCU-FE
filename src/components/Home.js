@@ -7,9 +7,7 @@ import { Alert,Form, Button, Container, Row, Col, Card, Modal } from "react-boot
 export default function Home() {
   const dispatch = useContext(DispatchContext);
   const [authState, uiState] = useContext(StateContext);
-  if (!authState?.authenicated){
-    console.log("not authenticated") // this works, use this to forward back to the other options
-  }
+  console.log(authState)
   const [authenticated, setAuthenticated] = useState(authState.authenticated)
   const [userData, setUserData] = useState(authState.user_data)
   const [errors, setErrors] = useState(uiState.errors)

@@ -38,7 +38,7 @@ def createdResponse(message):
 def login():
     body = request.get_json()
     access_token = create_access_token(identity="Justin")
-    #return positiveReponse({"token": access_token})
+    return positiveReponse({"token": access_token})
     errors = {}
     errors["general"] = 'Wrong Credentials, please try again' # this has to be general to fit the needs
     return user_error_to_json({"general":'Wrong Credentials, please try again'})

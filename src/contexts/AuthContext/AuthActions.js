@@ -5,7 +5,8 @@ import {
     LOADING_UI,
     SET_UNAUTHENTICATED,
     LOADING_USER,
-    MARK_NOTIFICATIONS_READ
+    MARK_NOTIFICATIONS_READ,
+    SET_AUTHENTICATED
   } from '../types';
 
   import axios from 'axios';
@@ -19,7 +20,7 @@ import {
       setAuthorizationHeader(res.data.token);
       getUserData(dispatch);
       dispatch({ type: CLEAR_ERRORS });
-      navigate("/");
+      navigate("/home");
     })
     .catch((err) => {
       if(!err.response){
@@ -46,6 +47,7 @@ export const getUserData = (dispatch) => {
         type: SET_USER,
         payload: res.data
       });
+      dispatch({type:SET_AUTHENTICATED});
     })
     .catch((err) => console.log(err));
 };
