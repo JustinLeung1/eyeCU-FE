@@ -20,7 +20,7 @@ export default function Login() {
     const dispatch = useContext(DispatchContext);
     const [authState, uiState] = useContext(StateContext);
     if(authState.authenticated){
-      navigate("/home");
+      navigate("/newhome");
     }
     const [authenticated, setAuthenticated] = useState(authState.authenticated);
     const [errors, setErrors] = useState(uiState.errors)

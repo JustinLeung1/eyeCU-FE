@@ -13,7 +13,8 @@ import { SET_AUTHENTICATED } from "../contexts/types"
 import Video from "./Video";
 import Profile from "./Profile";
 import { processDispatch } from "../utils/utils";
-
+import Settings from "./Settings";
+import NewHome from "./NewHome";
 axios.defaults.baseURL = 'http://localhost:5001'
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/login" element={<Login/>}/>
+                <Route path="/settings" element={<Settings/>}/>
+                <Route path="/newhome" element={<NewHome/>}/>
               </Routes>
       </Router>
       </GlobalContextProvider>

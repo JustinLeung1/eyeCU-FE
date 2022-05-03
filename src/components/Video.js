@@ -26,9 +26,8 @@ export default function Video() {
   }, [])
   return (
     <div>
-      <h2>Live Video Stream</h2>
       {socket ? 
-      <img src={img}/>
+      <img src={img} width="100%" className="feature-img" id="displayImg"/>
         :
       <img style={{border:"5px solid black" }} src={"/unavailable.png"}/>
       }

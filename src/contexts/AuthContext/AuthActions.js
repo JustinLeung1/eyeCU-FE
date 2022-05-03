@@ -20,7 +20,7 @@ import {
       setAuthorizationHeader(res.data.token);
       getUserData(dispatch);
       dispatch({ type: CLEAR_ERRORS });
-      navigate("/home");
+      navigate("/newhome");
     })
     .catch((err) => {
       if(!err.response){
@@ -63,7 +63,7 @@ export const getUserData = (dispatch) => {
         setAuthorizationHeader(res.data.token);
         getUserData(dispatch)
         dispatch({ type: CLEAR_ERRORS });
-        navigate("/");
+        navigate("/newhome");
       })
       .catch((err) => {
         console.log(err)
@@ -80,11 +80,11 @@ const setAuthorizationHeader = (token) => {
     axios.defaults.headers.common['Authorization'] = FBIdToken;
   };
 
-export const logoutUser = (dispatch)  =>{
+export const logoutUser = (navigate, dispatch)  =>{
     localStorage.removeItem('FBIdToken');
     delete axios.defaults.headers.common['Authorization'];
-    console.log(dispatch)
-    //dispatch({type: SET_UNAUTHENTICATED});
+    dispatch({type: SET_UNAUTHENTICATED});
+    navigate("/login");
 }
 
 export const uploadImage = async (dispatch, image, navigate) =>{
