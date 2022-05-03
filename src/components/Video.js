@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {io} from "socket.io-client";
 
 export default function Video() {
-  const BASEENDPOINT = 'http://127.0.0.1:5001/';
+  const BASEENDPOINT = "http://0.0.0.0:5001/";
   const [img, setImg] = useState('');
   const [socket, setSocket] = useState();
 
@@ -13,7 +13,7 @@ export default function Video() {
     }
 
     const newSocket = io(BASEENDPOINT + 'web', {
-        transports:["websocket"]
+        transports:["polling","websocket"]
     });
     newSocket.on('connect', ()=>{
         console.log("connected to socket")

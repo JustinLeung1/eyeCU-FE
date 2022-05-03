@@ -50,8 +50,8 @@ export default function Login() {
           </Card.Body>
           <Form onSubmit={handleSubmit}>
               <Form.Group id="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" ref={emailRef}required/>
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="username" ref={emailRef}required/>
               </Form.Group>
               <Form.Group id="password">
                 <Form.Label>Password</Form.Label>
