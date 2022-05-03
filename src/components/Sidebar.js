@@ -59,7 +59,7 @@ export default function Sidebar() {
   return (
     <div>
         <section id="sidebar" ref={sidebar}>
-            <a href="#" class="brand"> {/** Need to add active to this part */}
+            <a class="brand"> {/** Need to add active to this part */}
                 <svg id="logo" viewBox="-100,-100,200,200" style={{width: "20%"}} ref={logo}>
                     <image id="user" x="-40" y="-40" width="80" height="80" href="./img/user.svg" />
                     <image id="checkmark" x="10" y="-60" width="40" height="40" href="./img/green_check.svg" />
@@ -115,7 +115,7 @@ export default function Sidebar() {
                 </form>
                 <input type="checkbox" id="switch-mode" hidden ref={darkModeToggle} onClick={handleDarkModeToggle}/>
                 <label for="switch-mode" className="switch-mode"></label>
-                <a href="#" className="notification">
+                <a  className="notification">
                     <i className='bx bxs-bell'></i>
                     <span className="num">8</span>
                 </a>
