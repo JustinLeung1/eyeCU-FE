@@ -7,7 +7,7 @@ import axios from 'axios';
 import jwtDecode from "jwt-decode";
 import { AppContextProvider } from "../contexts/AppContextProvider";
 import { GlobalContextProvider, StateContext, DispatchContext } from "../contexts/AppContextProvider";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import { getUserData, logoutUser } from "../contexts/AuthContext/AuthActions";
 import { SET_AUTHENTICATED } from "../contexts/types"
 import Video from "./Video";
@@ -29,6 +29,7 @@ function App() {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/newhome" element={<NewHome/>}/>
+                <Route path="*" element={<Navigate to={{pathname: "/newhome"}} />} />
               </Routes>
       </Router>
       </GlobalContextProvider>
