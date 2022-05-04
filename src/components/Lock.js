@@ -88,7 +88,7 @@ export default function Lock() {
             :   
             <>
                 <h1>Lock not connected</h1>
-                <img src={"/BrokenLock.png"}/>
+                <img src="/BrokenLock.png"/>
             </>
             }
     </div>

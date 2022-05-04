@@ -5,7 +5,7 @@ import Video from './Video'
 export default function NewHome() {
     return (
         <div>
-            <Sidebar/>
+            <Sidebar active={"dashboard"}/>
             <section id='content'>
                 <main>
                     <div className="head-title">

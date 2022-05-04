@@ -3,6 +3,7 @@ import { DispatchContext, StateContext } from '../contexts/AppContextProvider'
 import { uploadImage } from '../contexts/AuthContext/AuthActions';
 import { useNavigate } from "react-router-dom"
 import Sidebar from './Sidebar'
+import ReactModal from 'react-modal';
 export default function Settings() {
     const dispatch = useContext(DispatchContext);
     const [authState, uiState] = useContext(StateContext);
@@ -30,8 +31,14 @@ export default function Settings() {
     const handleClose = () => setChangePicture(!changePicture); // also add getting rid of picture
   
     const handlePictureChange = (e) =>{
+    console.log("this is hitting");
       e.preventDefault();
       setChangePicture(!changePicture)
+    }
+
+    const handleChooseFile = (e) =>{
+        e.preventDefault();
+        inputRef.current?.click()
     }
   
     const handleSubmit = (e) =>{
@@ -55,12 +62,26 @@ export default function Settings() {
       }
     }
 
+    const [modalOpen, setModalOpen] = useState(false);
+
+    useEffect(()=>{
+        console.log(modalOpen);
+    }, [modalOpen])
+
+    const handleModalOpen = (e) =>{
+        e.preventDefault();
+        setModalOpen(true);
+    }
+    const handleModalClose = (e) =>{
+        e.preventDefault();
+        setModalOpen(false);
+    }
 
 
 
   return (
     <div>
-        <Sidebar/>
+        <Sidebar active={"settings"}/>
         <section id="content">
             <main>
                 <div className="head-title">
@@ -82,7 +103,7 @@ export default function Settings() {
                         <i className='bx bxs-user' id="editUser"></i>
                         <span className="text">
                             <h3>Name: {userData?.full_name}</h3>
-                            <button className="user-edit-btn" id="showUploadBtn" onclick="showUpload()">Upload Photo</button> {/** we do the change to upload pictures here */}
+                            <button className="user-edit-btn" id="showUploadBtn">Upload Photo</button> {/** we do the change to upload pictures here */}
                         </span>
                     </li>
                     <li>
@@ -121,7 +142,7 @@ export default function Settings() {
                         <span className="text">
                             <h3 style={{marginBottom: "1%", marginTop: ".5%"}}>{userData?.full_name}</h3>
                         </span>
-                        <button className="upload-btn" type="submit" onclick="document.getElementById('uploadBtn').click()"><i className='bx bxs-camera-plus' style={{fontSize: "large", verticalAlign: "middle"}}></i> Upload Photo</button>
+                        <button className="upload-btn" type="submit" onClick={handleModalOpen}><i className='bx bxs-camera-plus' style={{fontSize: "large", verticalAlign: "middle"}}></i> Upload Photo</button>
                         <input id="uploadBtn" style={{display: "none"}} type="file" accept="image/png, image/jpg"/>
                     </div>
 					<div className="video-feature" id="videoFeature">
@@ -130,6 +151,53 @@ export default function Settings() {
 			</div>
             </main>
         </section>
+        <ReactModal
+            isOpen={modalOpen}
+            contentLabel={"Minimal Modal Example"}
+            className="Modal"
+            style={{
+                overlay:{
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: 'black'
+                },
+                content: {
+                    position: 'absolute',
+                    display: 'grid',
+                    top: '50%',
+                    left: '50%',
+                    border: '1px solid black',
+                    background: '#fff',
+                    overflow: 'auto',
+                    transform: 'translate(-50%, -50%)',
+                    borderRadius: '4px',
+                    outline: 'none',
+                    padding: '20px',
+                    height: '450px',
+                    width: '500px',
+                    textSize: '17px'
+                  }
+            }}
+        >
+            <div className='modal-header' >
+                <h1 style={{borderBottom: "1px solid grey"}}>Upload Image</h1>
+            </div>
+            <div className='modal-content'>
+                <h1>IMAGE</h1>
+                <img  width={"250px"} src={selectedPicture?.img} />
+            </div>
+            <div className='modal-footer' style={{alignItems:"end", borderTop: "1px solid grey"}}>
+                <form>
+                    <button onClick={handleChooseFile} variant="primary" > {/* add logic so it uploads picture here*/}
+                        {selectedPicture == null ? "Upload Picture" : "Upload New Picture"}
+                        <input type="file" ref={inputRef} className="d-none" accept="image/png, image/jpeg" onChange={handleUploadPicture} style={{display:""}} />
+                    </button>
+                </form>
+                <button onClick={handleSubmit} disabled={selectedPicture === null}>Save Changes</button>
+            </div>
+        </ReactModal>
     </div>
   )
 }

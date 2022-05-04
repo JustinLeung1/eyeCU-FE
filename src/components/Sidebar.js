@@ -9,7 +9,7 @@ import { DispatchContext, StateContext } from '../contexts/AppContextProvider'
  */
  import { useNavigate } from "react-router-dom"
  import { logoutUser} from '../contexts/AuthContext/AuthActions';
-export default function Sidebar() {
+export default function Sidebar(props) {
     const menuBar = useRef(null);
     const sidebar = useRef(null);
     const logoText = useRef(null);
@@ -61,15 +61,15 @@ export default function Sidebar() {
         <section id="sidebar" ref={sidebar}>
             <a class="brand"> {/** Need to add active to this part */}
                 <svg id="logo" viewBox="-100,-100,200,200" style={{width: "20%"}} ref={logo}>
-                    <image id="user" x="-40" y="-40" width="80" height="80" href="./img/user.svg" />
-                    <image id="checkmark" x="10" y="-60" width="40" height="40" href="./img/green_check.svg" />
+                    <image id="user" x="-40" y="-40" width="80" height="80" href="img/user.svg" />
+                    <image id="checkmark" x="10" y="-60" width="40" height="40" href="img/green_check.svg" />
                     <g id="bodies"></g>
                     <g id="edges"></g>
                 </svg><br/>
                 <span class="text" id="logoText" ref={logoText}>EyeCU</span>
             </a>
             <ul class="side-menu top">
-                <li class="active"> {/** Here is where we add the logic for which one is clicked on */}
+                <li className={props.active === 'dashboard'? 'active' : ''}> {/** Here is where we add the logic for which one is clicked on */}
                     <a onClick={ () => navigate("/newhome")}>
                         <i class='bx bxs-dashboard'></i>
                         <span class="text" id="dashboard">Dashboard</span>
@@ -89,8 +89,8 @@ export default function Sidebar() {
                 </li>
             </ul>
             <ul class="side-menu">
-                <li>
-                    <a onClick={() => navigate("/settings")}>
+                <li className={props.active === 'settings'? 'active' : ''}>
+                    <a  onClick={() => navigate("/settings")}>
                         <i class='bx bxs-cog'></i>
                         <span class="text" id="settings">Settings</span>
                     </a>
@@ -126,7 +126,7 @@ export default function Sidebar() {
                             </>
                         :
                         <>
-                            <img src="img\user.png" id="miniProfile"/>
+                            <img src={'/img/user.png'} id="miniProfile"/>
                         </>
                         }
                 </a>
