@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { DispatchContext, StateContext } from '../contexts/AppContextProvider'
 import { uploadImage } from '../contexts/AuthContext/AuthActions';
 import { useNavigate } from "react-router-dom"
+import { Alert } from 'react-bootstrap';
 import Sidebar from './Sidebar'
 import ReactModal from 'react-modal';
 export default function Settings() {
@@ -37,7 +38,6 @@ export default function Settings() {
     }
 
     const handleChooseFile = (e) =>{
-        e.preventDefault();
         inputRef.current?.click()
     }
   
@@ -186,13 +186,14 @@ export default function Settings() {
             </div>
             <div className='modal-content'>
                 <h1>IMAGE</h1>
-                <img  width={"250px"} src={selectedPicture?.img} />
+                    {errors && <Alert variant="danger" style={{fontSize:"20px"}}>{errors.general}</Alert>}
+                    <img  width={"250px"} src={selectedPicture?.img} />
             </div>
             <div className='modal-footer' style={{alignItems:"end", borderTop: "1px solid grey"}}>
                 <form>
-                    <button onClick={handleChooseFile} variant="primary" > {/* add logic so it uploads picture here*/}
+                    <button type="button"onClick={handleChooseFile} variant="primary" > {/* add logic so it uploads picture here*/}
                         {selectedPicture == null ? "Upload Picture" : "Upload New Picture"}
-                        <input type="file" ref={inputRef} className="d-none" accept="image/png, image/jpeg" onChange={handleUploadPicture} style={{display:""}} />
+                        <input type="file" ref={inputRef} className="d-none" accept="image/png, image/jpeg" onChange={handleUploadPicture} style={{display:"none"}} />
                     </button>
                 </form>
                 <button onClick={handleSubmit} disabled={selectedPicture === null}>Save Changes</button>
