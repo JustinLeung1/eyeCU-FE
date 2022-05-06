@@ -43,7 +43,7 @@ export default function Signup() {
           password: passwordRef.current.value,
           confirmPassword: passwordConfirmRef.current.value 
         }
-        signUpUser(object, navigate, dispatch)
+        signUpUser(object, navigate("/login"), dispatch)
 
     }
   return (
@@ -55,7 +55,7 @@ export default function Signup() {
           </Card.Body>
           <Form onSubmit={handleSubmit}>
               <Form.Group id="username">
-                <Form.Label>Username</Form.Label>
+                <Form.Label>Name for Identification</Form.Label>
                 <Form.Control type="username" ref={userRef}required/>
               </Form.Group>
               <Form.Group id="email">

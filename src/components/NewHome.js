@@ -2,6 +2,7 @@ import React from 'react'
 import Sidebar from './Sidebar'
 import Lock from './Lock'
 import Video from './Video'
+import Name from './Name'
 export default function NewHome() {
     return (
         <div>
@@ -73,7 +74,7 @@ export default function NewHome() {
                         </span>
                         <span className="text">
                             <h3>Face Recognition</h3>
-                            <p>Vi Nguyen</p>
+                            <Name/>
                         </span>
                     </li>
                     <li>

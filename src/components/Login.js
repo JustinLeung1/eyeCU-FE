@@ -35,7 +35,7 @@ export default function Login() {
         setErrors({});
         setLoading(true)
         const object = {
-          username: emailRef.current.value,
+          email: emailRef.current.value,
           password: passwordRef.current.value,
         }
         loginUser(object, navigate, dispatch)
@@ -50,8 +50,8 @@ export default function Login() {
           </Card.Body>
           <Form onSubmit={handleSubmit}>
               <Form.Group id="email">
-                <Form.Label>Username</Form.Label>
-                <Form.Control type="username" ref={emailRef}required/>
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="email" ref={emailRef}required/>
               </Form.Group>
               <Form.Group id="password">
                 <Form.Label>Password</Form.Label>
