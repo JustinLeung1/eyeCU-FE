@@ -29,7 +29,7 @@ function App() {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/newhome" element={<NewHome/>}/>
-                <Route path="*" element={<Navigate to={{pathname: "/newhome"}} />} />
+                <Route path="*" element={<Navigate to={{pathname: "/login"}} />} />
               </Routes>
       </Router>
       </GlobalContextProvider>

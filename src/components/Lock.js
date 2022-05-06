@@ -14,8 +14,8 @@ export default function Lock() {
             mode:'no-cors'
         });
     }
-    // const BASEENDPOINTlock = 'http://192.168.1.8:5002/';
-    const BASEENDPOINTlock = "http://10.0.0.136:5002/";
+    const BASEENDPOINTlock = 'http://192.168.1.13:5002/';
+    //const BASEENDPOINTlock = "http://10.0.0.136:5002/";
     const BASEENDPOINT = 'http://0.0.0.0:5001/';
     const TIME = 1000;
     const [locked, setLocked] = useState(true);
@@ -65,7 +65,7 @@ export default function Lock() {
                                     <h3 className="box-title">Grant Access</h3>
                                     <div className="buttons">
                                         <button id="lock-btn" className="unlock-btn" type="submit"
-                                            onClick={()=>setLocked(false)}>Unlock</button> {/** todo change these so they coorelate */}
+                                            onClick={openLock}>Unlock</button> {/** todo change these so they coorelate */}
                                     </div>
                                 </span>
                             </>
@@ -79,7 +79,7 @@ export default function Lock() {
                                     <h3 className="box-title">Grant Access</h3>
                                     <div className="buttons">
                                         <button id="lock-btn" className="unlock-btn" type="submit"
-                                            onClick={()=>setLocked(true)}>Unlock</button>
+                                            onClick={closeLock}>Unlock</button>
                                     </div>
                                 </span>
                             </>

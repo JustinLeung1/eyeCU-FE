@@ -30,9 +30,9 @@ export default function NewHome() {
                                 <h3>Camera</h3>
                             </div>
                             <div className="video-feature" id="videoFeature">
-                                {/** Add logic here to add the live video feed  */}
+                                
                                 <Video/>
-                                {/* <img src="img\solidblack-background.jpg" width="100%" className="feature-img" id="displayImg"/> */}
+                            
                             </div>
                         </div>
                         <div className="todo">
@@ -87,7 +87,7 @@ export default function NewHome() {
                                 <button id="lock-btn" className="unlock-btn" type="submit"
                                     onclick="toggleLock()">Unlock</button>
                             </div>
-                        </span> */}
+                        </span>  */}
                         <Lock/>
                     </li>
                     <li>
