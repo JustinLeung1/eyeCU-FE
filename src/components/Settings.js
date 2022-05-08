@@ -65,7 +65,7 @@ export default function Settings() {
     const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(()=>{
-        console.log(modalOpen);
+        //return setModalOpen(false);
     }, [modalOpen])
 
     const handleModalOpen = (e) =>{
@@ -161,7 +161,7 @@ export default function Settings() {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    backgroundColor: 'black'
+                    backgroundColor: 'rgba(0,0,0,0.5)'
                 },
                 content: {
                     position: 'absolute',
@@ -175,8 +175,10 @@ export default function Settings() {
                     borderRadius: '4px',
                     outline: 'none',
                     padding: '20px',
-                    height: '450px',
-                    width: '500px',
+                    height: 'fit-content',
+                    width: 'fit-content',
+                    minWidth: '400px',
+                    minHeight: '500px',
                     textSize: '17px'
                   }
             }}
