@@ -52,6 +52,74 @@ export default function Sidebar(props) {
     }, [authState])
   
     useEffect(()=>{
+
+        const SHUTTER_WING_COUNT = 8;
+
+        let r = 80,
+            arc = (x, y, s) => `A${r},${r},0,0,${s},${x},${y}`,
+            path = (i, d) => `<path transform='rotate(${i / +SHUTTER_WING_COUNT * 360})' ${d}></path>`;
+        
+        function upd(val) {
+            // Animate shutter
+            let step = Math.PI * (0.5 + 2 / +SHUTTER_WING_COUNT);
+            let p1x = Math.cos(step) * r;
+            let p1y = Math.sin(step) * r;
+            let cos = Math.cos(-val);
+            let sin = Math.sin(-val);
+            let c1x = p1x - cos * p1x - sin * p1y;
+            let c1y = p1y - cos * p1y + sin * p1x;
+            let dx = - sin * r - c1x;
+            let dy = r - cos * r - c1y;
+            let dc = Math.sqrt(dx * dx + dy * dy);
+            let a = Math.atan2(dy, dx) - Math.acos(dc / 2 / r);
+            let x = c1x + Math.cos(a) * r;
+            let y = c1y + Math.sin(a) * r;
+
+            let edges = document.getElementById("edges");
+            let bodies = document.getElementById("bodies");
+            let user = document.getElementById("user");
+            let checkmark = document.getElementById("checkmark");
+        
+            let edge = `M${p1x},${p1y}${arc(0, r, 0)}${arc(x, y, 1)}`;
+            edges.innerHTML = bodies.innerHTML = '';
+            for (let i = 0; i < +SHUTTER_WING_COUNT; i++) {
+                edges.innerHTML += path(i, `fill=none stroke=white d='${edge}'`);
+                bodies.innerHTML += path(i, `fill=var(--blue) d='${edge}${arc(p1x, p1y, 0)}'`);
+            }
+        
+            // Animate user
+            user.style.opacity = (1 - val * 2);
+        
+            // Animate check
+            checkmark.style.opacity = (1 - val * 8);
+        };
+        
+        upd(0.5);
+        
+        let direction = 1;
+        let renderRatio = 0;
+        let step = 0.01;
+        let rest = 0;
+        
+        setInterval(function(){
+            if (rest > 0){
+                rest -= step;
+            }
+            else {
+                upd(renderRatio * 1.04);
+                renderRatio += (step * direction);
+                if (renderRatio < 0.001){
+                    rest = step * 100;
+                }
+        
+                if (renderRatio > 1.04 || renderRatio < 0){
+                    direction *= -1;
+                    renderRatio += (2 * step * direction);
+                }
+            }
+        }, 10);
+        
+
       setErrors(uiState.errors)
       setNonLocalLoading(uiState.loading)
     }, [uiState.errors, uiState.loading])

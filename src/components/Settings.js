@@ -64,6 +64,10 @@ export default function Settings() {
 
     const [modalOpen, setModalOpen] = useState(false);
 
+    useEffect(()=>{
+        console.log(modalOpen);
+    }, [modalOpen])
+
     const handleModalOpen = (e) =>{
         e.preventDefault();
         setModalOpen(true);
@@ -151,20 +155,17 @@ export default function Settings() {
             isOpen={modalOpen}
             contentLabel={"Minimal Modal Example"}
             className="Modal"
-            onRequestClose={handleModalClose}
             style={{
                 overlay:{
                     top: 0,
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    backgroundColor: 'rgba(0,0,0,0.5)'
+                    backgroundColor: 'black'
                 },
                 content: {
                     position: 'absolute',
                     display: 'grid',
-                    //gridTemplateColumns:'repeat(2,1fr)',
-                    gridTemplateRows:'repeat(3, 1fr);',
                     top: '50%',
                     left: '50%',
                     border: '1px solid black',
@@ -174,30 +175,21 @@ export default function Settings() {
                     borderRadius: '4px',
                     outline: 'none',
                     padding: '20px',
-                    height: 'fit-content',
-                    width: 'fit-content',
-                    minWidth: '400px',
-                    minHeight: '500px',
+                    height: '450px',
+                    width: '500px',
                     textSize: '17px'
                   }
             }}
         >
-            <div className='modal-header' style={{flexDirection: "flex", borderBottom: "1px solid grey", gridRow:"1", display:"inline-flex"}}>
-                <div>
-                    <h1>Upload Image</h1>
-                </div>
-                <div>
-                    <button onClick={handleModalClose}>
-                        <i class='bx bx-window-close bx-lg' ></i>
-                    </button>
-                </div>
+            <div className='modal-header' >
+                <h1 style={{borderBottom: "1px solid grey"}}>Upload Image</h1>
             </div>
-            <div className='modal-content' style={{gridRow:"2"}}>
+            <div className='modal-content'>
                 <h1>IMAGE</h1>
                     {errors && <Alert variant="danger" style={{fontSize:"20px"}}>{errors.general}</Alert>}
                     <img  width={"250px"} src={selectedPicture?.img} />
             </div>
-            <div className='modal-footer' style={{alignItems:"end", borderTop: "1px solid grey", gridRow:"3"}}>
+            <div className='modal-footer' style={{alignItems:"end", borderTop: "1px solid grey"}}>
                 <form>
                     <button type="button"onClick={handleChooseFile} variant="primary" > {/* add logic so it uploads picture here*/}
                         {selectedPicture == null ? "Upload Picture" : "Upload New Picture"}
