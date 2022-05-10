@@ -163,6 +163,8 @@ export default function Settings() {
                 content: {
                     position: 'absolute',
                     display: 'grid',
+                    gridTemplateColumns:'repeat(2,1fr)',
+                    gridTemplateRows:'repeat(3, 1fr);',
                     top: '50%',
                     left: '50%',
                     border: '1px solid black',
@@ -180,8 +182,11 @@ export default function Settings() {
                   }
             }}
         >
-            <div className='modal-header' >
-                <h1 style={{borderBottom: "1px solid grey"}}>Upload Image</h1>
+            <div className='modal-header' style={{flexDirection: "flex", borderBottom: "1px solid grey", gridColumn:"1/3"}}>
+                <h1>Upload Image</h1>
+                <button onClick={handleModalClose}>
+                    <i class='bx bx-exit bx-lg' ></i>
+                </button>
             </div>
             <div className='modal-content'>
                 <h1>IMAGE</h1>
