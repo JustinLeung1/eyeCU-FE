@@ -64,10 +64,6 @@ export default function Settings() {
 
     const [modalOpen, setModalOpen] = useState(false);
 
-    useEffect(()=>{
-        //return setModalOpen(false);
-    }, [modalOpen])
-
     const handleModalOpen = (e) =>{
         e.preventDefault();
         setModalOpen(true);
@@ -155,6 +151,7 @@ export default function Settings() {
             isOpen={modalOpen}
             contentLabel={"Minimal Modal Example"}
             className="Modal"
+            onRequestClose={handleModalClose}
             style={{
                 overlay:{
                     top: 0,
