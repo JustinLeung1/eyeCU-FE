@@ -163,7 +163,7 @@ export default function Settings() {
                 content: {
                     position: 'absolute',
                     display: 'grid',
-                    gridTemplateColumns:'repeat(2,1fr)',
+                    //gridTemplateColumns:'repeat(2,1fr)',
                     gridTemplateRows:'repeat(3, 1fr);',
                     top: '50%',
                     left: '50%',
@@ -182,18 +182,22 @@ export default function Settings() {
                   }
             }}
         >
-            <div className='modal-header' style={{flexDirection: "flex", borderBottom: "1px solid grey", gridColumn:"1/3"}}>
-                <h1>Upload Image</h1>
-                <button onClick={handleModalClose}>
-                    <i class='bx bx-exit bx-lg' ></i>
-                </button>
+            <div className='modal-header' style={{flexDirection: "flex", borderBottom: "1px solid grey", gridRow:"1", display:"inline-flex"}}>
+                <div>
+                    <h1>Upload Image</h1>
+                </div>
+                <div>
+                    <button onClick={handleModalClose}>
+                        <i class='bx bx-window-close bx-lg' ></i>
+                    </button>
+                </div>
             </div>
-            <div className='modal-content'>
+            <div className='modal-content' style={{gridRow:"2"}}>
                 <h1>IMAGE</h1>
                     {errors && <Alert variant="danger" style={{fontSize:"20px"}}>{errors.general}</Alert>}
                     <img  width={"250px"} src={selectedPicture?.img} />
             </div>
-            <div className='modal-footer' style={{alignItems:"end", borderTop: "1px solid grey"}}>
+            <div className='modal-footer' style={{alignItems:"end", borderTop: "1px solid grey", gridRow:"3"}}>
                 <form>
                     <button type="button"onClick={handleChooseFile} variant="primary" > {/* add logic so it uploads picture here*/}
                         {selectedPicture == null ? "Upload Picture" : "Upload New Picture"}
