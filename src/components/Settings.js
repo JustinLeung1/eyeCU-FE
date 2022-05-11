@@ -59,6 +59,11 @@ export default function Settings() {
           img: URL.createObjectURL(img)
         }
         setSelectedPicture(all_data) // todo get rid of old image so we dont destroy the local memory
+
+        let saveChangesBtn = document.getElementById('saveChangesBtn');
+
+        saveChangesBtn.classList.remove('disable-btn');
+        saveChangesBtn.classList.add('upload-btn');
       }
     }
 
@@ -142,7 +147,7 @@ export default function Settings() {
                         <span className="text">
                             <h3 style={{marginBottom: "1%", marginTop: ".5%"}}>{userData?.full_name}</h3>
                         </span>
-                        <button className="upload-btn" type="submit" onClick={handleModalOpen}><i className='bx bxs-camera-plus' style={{fontSize: "large", verticalAlign: "middle"}}></i> Upload Photo</button>
+                        <button className="btn upload-btn" type="submit" onClick={handleModalOpen}><i className='bx bxs-camera-plus' style={{fontSize: "large", verticalAlign: "middle"}}></i> Upload Photo</button>
                         <input id="uploadBtn" style={{display: "none"}} type="file" accept="image/png, image/jpg"/>
                     </div>
 					<div className="video-feature" id="videoFeature">
@@ -155,48 +160,60 @@ export default function Settings() {
             isOpen={modalOpen}
             contentLabel={"Minimal Modal Example"}
             className="Modal"
+            ariaHideApp={false}
             style={{
                 overlay:{
                     top: 0,
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    backgroundColor: 'black'
+                    // backgroundColor: 'black'
                 },
                 content: {
                     position: 'absolute',
                     display: 'grid',
                     top: '50%',
                     left: '50%',
-                    border: '1px solid black',
                     background: '#fff',
                     overflow: 'auto',
                     transform: 'translate(-50%, -50%)',
-                    borderRadius: '4px',
                     outline: 'none',
                     padding: '20px',
                     height: '450px',
                     width: '500px',
-                    textSize: '17px'
+                    textSize: '17px',
+                    borderRadius: "3%",
+                    "box-shadow":
+                        `0 2.8px 2.2px rgba(0, 0, 0, 0.04),
+                        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+                        0 12.5px 10px rgba(0, 0, 0, 0.06),
+                        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+                        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+                        0 100px 80px rgba(0, 0, 0, 0.12)`
                   }
             }}
+            
         >
             <div className='modal-header' >
-                <h1 style={{borderBottom: "1px solid grey"}}>Upload Image</h1>
+                <div style={{display: 'flex'}}>
+                    <font color=" #a6a6a6" face="verdana"><h1 >Upload Image</h1></font>
+                    <a href="#" style={{"margin-left": "auto"}} onClick={handleModalClose}><h2>✖️</h2></a>
+                </div>
+                <br></br>
+                <div style={{borderTop: "1px solid #e1e1e1"}}></div>
             </div>
-            <div className='modal-content'>
-                <h1>IMAGE</h1>
+            <div className='modal-content' style={{display: "flex", justifyContent:"center"}}>
                     {errors && <Alert variant="danger" style={{fontSize:"20px"}}>{errors.general}</Alert>}
-                    <img  width={"250px"} src={selectedPicture?.img} />
+                    <img style={{borderRadius: "50%", padding: "2rem", "objectFit": "cover"}}  height="300px" width={"300px"} onClick={handleChooseFile} src={selectedPicture?.img || "https://t3.ftcdn.net/jpg/02/18/21/86/360_F_218218632_jF6XAkcrlBjv1mAg9Ow0UBMLBaJrhygH.jpg"} />
             </div>
-            <div className='modal-footer' style={{alignItems:"end", borderTop: "1px solid grey"}}>
+            <div className='modal-footer' style={{alignItems:"end", borderTop: "1px solid #e1e1e1", display: "flex"}}>
                 <form>
-                    <button type="button"onClick={handleChooseFile} variant="primary" > {/* add logic so it uploads picture here*/}
+                    <button className="upload-btn" type="button"onClick={handleChooseFile} variant="primary" > {/* add logic so it uploads picture here*/}
                         {selectedPicture == null ? "Upload Picture" : "Upload New Picture"}
                         <input type="file" ref={inputRef} className="d-none" accept="image/png, image/jpeg" onChange={handleUploadPicture} style={{display:"none"}} />
                     </button>
                 </form>
-                <button onClick={handleSubmit} disabled={selectedPicture === null}>Save Changes</button>
+                <button style={{"margin-left": "auto"}} className="disable-btn" id='saveChangesBtn' onClick={handleSubmit} disabled={selectedPicture === null}>Save Changes</button>
             </div>
         </ReactModal>
     </div>
